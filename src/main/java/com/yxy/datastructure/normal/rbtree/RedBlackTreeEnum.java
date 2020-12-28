@@ -1,4 +1,4 @@
-package com.yxy.datastructure.redis.rbtree;
+package com.yxy.datastructure.normal.rbtree;
 
 /**
  * @Author XinYu Yang
