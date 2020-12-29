@@ -129,7 +129,7 @@ public class RedisHash {
         return false;
     }
 
-    //del
+    //del 
     public int del(String key) {
         int index = getIndex(key, ht.get(0));
         RedisHashNode redisHashNode = ht.get(0).getTable()[index];
