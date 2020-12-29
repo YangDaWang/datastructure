@@ -109,12 +109,7 @@ public class RedisHash {
         redisHashNode.setNext(newNode);
         ht1.setTable(table);
         //简单模拟一下异步扩容
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                syncCapacity();
-            }
-        }).start();
+        new Thread(this::syncCapacity).start();
     }
 
     //异步扩容
@@ -134,6 +129,7 @@ public class RedisHash {
         return false;
     }
 
+    //del
     public int del(String key) {
         int index = getIndex(key, ht.get(0));
         RedisHashNode redisHashNode = ht.get(0).getTable()[index];
