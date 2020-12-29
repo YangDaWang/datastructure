@@ -134,8 +134,23 @@ public class RedisHash {
         return false;
     }
 
-    public int del(Object node) {
-        //todo
-        return -1;
+    public int del(String key) {
+        int index = getIndex(key, ht.get(0));
+        RedisHashNode redisHashNode = ht.get(0).getTable()[index];
+        while (redisHashNode.getNext() != null) {
+            if (key.equals(redisHashNode.getNext().getKey())) {
+                if (redisHashNode.getNext().getNext() == null) {
+                    redisHashNode.setNext(null);
+                    return 1;
+                }
+                redisHashNode.setNext(redisHashNode.getNext().getNext());
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    private int getIndex(String key, Ht ht) {
+        return key.hashCode() & ht.getSizemask();
     }
 }
